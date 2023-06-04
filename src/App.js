@@ -1,33 +1,26 @@
 import "./App.css";
 import AddTransaction from "./Components/AddTransaction";
-import { useEffect, useState } from "react";
-import DisplayTransaction from "./Components/DisplayTransaction";
+import { useState } from "react";
+import DisplayTransactions from "./Components/DisplayTransactios";
 
 function App() {
-  const [transaction, setTransaction] = useState([]);
-
+  const [transactions, setTransactions] = useState([]);
   const add = (transactionItem, transactionAmount, transactionType) => {
-    setTransaction((transaction) => [
-      ...transaction,
+    setTransactions((transactions) => [
+      ...transactions,
       {
         transactionItem: transactionItem,
         transactionAmount: transactionAmount,
         transactionType: transactionType,
       },
     ]);
-
-    // console.log(transaction)
-
+    console.log(transactions)
   };
-  // useEffect(() => {}, [transaction]);
   return (
-    <div className="App">
-       <div className="container">
+    <div className="container">
+      <DisplayTransactions transactions={transactions}/>
       <AddTransaction add={add} />
     </div>
-    <DisplayTransaction transaction={transaction}/>
-    </div>
-   
   );
 }
 

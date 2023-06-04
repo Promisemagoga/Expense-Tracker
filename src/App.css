@@ -1,59 +1,94 @@
-
-.App{
-  text-align: center;
-}
-.container{
-  display: flex;
-  justify-content: center;
-}
-
-.transaction--container{
-  display: flex;
-  flex-direction: column;
-  row-gap: 20px;
-  text-align: center;
-}
-
-input{
-  background-color: #ffffff;
-  width: 500px;
-  height: 50px;
-  border: none;
-  padding-left: 10px;
-}
-
-select{
-  width: 510px;
-  height: 50px;
-  background-color: #ffffff;
-  border: none;
-  padding-left: 10px;
-}
-
-button{
-  width: 300px;
-  height: 50px;
-  background-color: #FFDCB6;
-  border: 2px solid #FFDCB6;
-  color: #ffffff;
-  margin-left: auto;
-  margin-right: auto;
-  text-transform: capitalize;
-  font-size: 20px;
-  border-radius: 20px;
-
-}
-
-.displayContainer{
-  background-color: #FFDCB6;
-  width: 500px;
-  color: #ffffff;
-  margin-left: auto;
-  margin-right: auto;
-  padding-top: 20px;
-}
-
-hr{
+* {
+  padding: 0;
   margin: 0;
-  border: 1px solid #ffffff;
+}
+
+.container {
+  text-align: center;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  margin-top: 50px;
+}
+
+.addTransaction-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 30px;
+  margin-top: 30px;
+}
+
+input {
+  width: 500px;
+  height: 50px;
+  border: none;
+  padding-left: 20px;
+}
+
+select {
+  width: 516px;
+  height: 50px;
+  border: none;
+  padding-left: 20px;
+}
+
+button {
+  width: 300px;
+  height: 40px;
+  background-color: #FF0060;
+  border: none;
+  color: #ffffff;
+  text-transform: uppercase;
+  border-radius: 20px;
+}
+
+.transaction {
+  display: flex;
+  justify-content: space-between;
+  width: 500px;
+  background-color: #ffffff;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+
+.transaction h3{
+  padding: 20px;
+}
+
+.expenseIndicaor{
+  border-right: 5px solid red;
+}
+
+.incomeIndicator{
+  border-right: 5px solid green;
+
+}
+
+@media screen and (max-width:767px) {
+
+  input {
+    
+    width: 330px;
+    height: 50px;
+    
+  }
+  
+  select {
+    width: 346px;
+    height: 50px;
+  }
+
+  .transaction {
+    display: flex;
+    justify-content: space-between;
+    width: 330px;
+    background-color: #ffffff;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+  
 }
