@@ -1,13 +1,19 @@
 import { Alert } from "@mui/material";
 import { useEffect, useState } from "react";
+import UpdateTransactions from "../Components/UpdateTransactions";
 
 function HomePage() {
     const [transactionItem, setTransactionItem] = useState("");
     const [transactionAmount, setTransactionAmount] = useState("");
     const [transactionType, setTransactionType] = useState("");
-    const [transactions, setTransactions] = useState([])
+    const [transactions, setTransactions] = useState([]) || []
     const [deleteAlert, setDeleteAlert] = useState(false)
     const [addAlert, setAddAlert] = useState(false)
+    const [openUpDateModal, setOpenUpdateModal] = useState(false)
+    const [transportId, setTransportId] = useState("")
+    const [selectedTransaction, setSelectedTransaction] = useState(null)
+
+
 
 
     function add() {
@@ -62,12 +68,21 @@ function HomePage() {
         setDeleteAlert(true);
     }
 
+    function editFunc(index, data) {
+        const id = index
+        setTransportId(id)
+        setSelectedTransaction(data)
+        setOpenUpdateModal(true)
+    }
+
+
+
     return (
         <div className="container">
             <div>
                 <h2>History of transaction</h2>
                 {deleteAlert && (
-                    <Alert sx={{width:"22%"}} style={{marginLeft: "auto",marginRight:"auto", marginTop: "30px", marginBottom:"20px"}} severity="success" onClose={() => setDeleteAlert(false)} open={deleteAlert}>
+                    <Alert sx={{ width: "22%" }} style={{ marginLeft: "auto", marginRight: "auto", marginTop: "30px", marginBottom: "20px" }} severity="success" onClose={() => setDeleteAlert(false)} open={deleteAlert}>
                         Transaction successfully deleted!
                     </Alert>
                 )}
@@ -78,15 +93,15 @@ function HomePage() {
                         <h3>R{data.transactionAmount}</h3>
                         <h3>{data.transactionType}</h3>
                         <button className="delete actionBtns" onClick={() => deleteFun(index)}>Delete</button>
-                        <button className="update actionBtns">Update</button>
-                        {data.transactionType == "Expense" ? <div className="expenseIndicaor"></div> : <div className="incomeIndicator"></div>}
+                        <button className="update actionBtns" onClick={(event) => editFunc(index, data)}>Update</button>
+                        {data.transactionType === "Expense" ? <div className="expenseIndicaor"></div> : <div className="incomeIndicator"></div>}
                     </div>
                 ))}
             </div>
             <div>
                 <h1>Add new transaction</h1>
                 {addAlert && (
-                    <Alert sx={{width:"22%"}} style={{marginLeft: "auto",marginRight:"auto", marginTop: "30px", marginBottom:"20px"}} severity="success" onClose={() => setAddAlert(false)} open={addAlert}>
+                    <Alert sx={{ width: "22%" }} style={{ marginLeft: "auto", marginRight: "auto", marginTop: "30px", marginBottom: "20px" }} severity="success" onClose={() => setAddAlert(false)} open={addAlert}>
                         Transaction successfully Added!
                     </Alert>
                 )}
@@ -94,6 +109,7 @@ function HomePage() {
                     <input
                         type="text"
                         placeholder="Add item"
+                        name="transactionItem"
                         onChange={(event) => {
                             setTransactionItem(event.target.value);
                         }}
@@ -101,11 +117,13 @@ function HomePage() {
                     <input
                         type="text"
                         placeholder="Add amount"
+                        name="transactionAmount"
                         onChange={(event) => {
                             setTransactionAmount(event.target.value);
                         }}
                     />
                     <select
+                        name="transactionType"
                         onChange={(event) => {
                             setTransactionType(event.target.value);
                         }}
@@ -117,6 +135,8 @@ function HomePage() {
                     <button className="addBtn" onClick={add}>Add a transaction</button>
                 </div>
             </div>
+            {openUpDateModal && <UpdateTransactions setOpenUpdateModal={setOpenUpdateModal} selectedTransaction={selectedTransaction} transactions={transactions} />}
+
         </div>
     );
 }
