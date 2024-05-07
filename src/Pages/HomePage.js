@@ -1,6 +1,7 @@
 import { Alert } from "@mui/material";
 import { useEffect, useState } from "react";
 import UpdateTransactions from "../Components/UpdateTransactions";
+import SideNav from "../Components/SideNav";
 
 function HomePage() {
     const [transactionItem, setTransactionItem] = useState("");
@@ -10,29 +11,49 @@ function HomePage() {
     const [deleteAlert, setDeleteAlert] = useState(false)
     const [addAlert, setAddAlert] = useState(false)
     const [openUpDateModal, setOpenUpdateModal] = useState(false)
-    const [transportId, setTransportId] = useState("")
+    const [transactionCategory, setTransactionCategory] = useState("")
     const [selectedTransaction, setSelectedTransaction] = useState(null)
+    const [financialAdvice, setFinancialAdvice] = useState([
+        "Buy a bus ticket instead",
 
+    ])
 
 
 
     function add() {
-        // setTransactions((transactions) => [
-        //     ...transactions,
-        //     {
-        //         transactionItem: transactionItem,
-        //         transactionAmount: transactionAmount,
-        //         transactionType: transactionType,
-        //     },
-        // ]);
+
+        const storedTransaction = localStorage.getItem("Transactions")
+        console.log(storedTransaction);
+
 
         const newTransactions = {
             transactionItem: transactionItem,
             transactionAmount: transactionAmount,
             transactionType: transactionType,
+            transactionCategory: transactionCategory,
+
         }
 
         const updatedTransactions = [...transactions, newTransactions]
+
+
+        // Calculate total income and expenses
+        const totalIncome = updatedTransactions.reduce((acc, cur) => {
+            return cur.transactionType === 'Income' ? acc + parseFloat(cur.transactionAmount) : acc;
+        }, 0);
+
+        const totalExpenses = updatedTransactions.reduce((acc, cur) => {
+            return cur.transactionType === 'Expense' ? acc + parseFloat(cur.transactionAmount) : acc;
+        }, 0);
+
+        // Check if expenses exceed income
+        if (totalExpenses > totalIncome) {
+            // Display error message
+            alert("Expenses exceed income!");
+          
+            return;
+        }
+
         setTransactions(updatedTransactions)
         localStorage.setItem("Transactions", JSON.stringify(updatedTransactions))
         setAddAlert(true);
@@ -55,6 +76,7 @@ function HomePage() {
     }, [])
 
 
+
     function deleteFun(index) {
         //it creates a copy of transactions array and nowthe new array is called transactionData
         const transactionData = transactions.slice();
@@ -69,8 +91,7 @@ function HomePage() {
     }
 
     function editFunc(index, data) {
-        const id = index
-        setTransportId(id)
+    
         setSelectedTransaction(data)
         setOpenUpdateModal(true)
     }
@@ -79,6 +100,7 @@ function HomePage() {
 
     return (
         <div className="container">
+      <SideNav />
             <div>
                 <h2>History of transaction</h2>
                 {deleteAlert && (
@@ -92,7 +114,8 @@ function HomePage() {
                         <h3>{data.transactionItem}</h3>
                         <h3>R{data.transactionAmount}</h3>
                         <h3>{data.transactionType}</h3>
-                        <button className="delete actionBtns" onClick={() => deleteFun(index)}>Delete</button>
+                        <h3>{data.transactionCategory}</h3>
+                        {data.transactionType !== "Expense" ? <div></div> : <button className="delete actionBtns" onClick={() => deleteFun(index)}>Delete</button>}
                         <button className="update actionBtns" onClick={(event) => editFunc(index, data)}>Update</button>
                         {data.transactionType === "Expense" ? <div className="expenseIndicaor"></div> : <div className="incomeIndicator"></div>}
                     </div>
@@ -131,6 +154,33 @@ function HomePage() {
                         <option>Select transaction type</option>
                         <option>Income</option>
                         <option>Expense</option>
+                    </select>
+                    <select
+                        name="transactionCategory"
+                        onChange={(event) => {
+                            setTransactionCategory(event.target.value);
+                        }}
+                    >
+                        <option>Select Transaction Category</option>
+                        <option>Income</option>
+                        <option>Housing </option>
+                        <option>Transportation</option>
+                        <option>Healthcare </option>
+                        <option>Utilities </option>
+                        <option>Debt Payments </option>
+                        <option>Insurance  </option>
+                        <option>Savings  </option>
+                        <option>Entertainment  </option>
+                        <option>Personal Care  </option>
+                        <option>Education  </option>
+                        <option>Clothing   </option>
+                        <option>Childcare   </option>
+                        <option>Gifts/Donations  </option>
+                        <option>Taxes   </option>
+                        <option>Travel</option>
+                        <option>Food   </option>
+                        <option>Miscellaneous   </option>
+
                     </select>
                     <button className="addBtn" onClick={add}>Add a transaction</button>
                 </div>
