@@ -42,7 +42,7 @@ const initialRows = [
     createData('Dec', 'R500', 'Outstanding', "awaiting", <Checkbox />, false),
 ];
 
-function PlanTwoData() {
+function PlanTwoData({recommendedPlanTwo}) {
 
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(4);
@@ -93,8 +93,12 @@ function PlanTwoData() {
  
   return (
     <div className='planTables'>
-
             <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+            {recommendedPlanTwo.length > 0 &&
+                        (
+                            <div className="recommendedBadge">Recommended</div>
+                        )
+                    }
                 <div className='planHeading'>
                     <h3 className='plaNum'>Moderate Plan</h3>
                     <h3 className='totalAmount'>Total: R6000</h3>

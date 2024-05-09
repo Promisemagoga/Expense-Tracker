@@ -28,11 +28,14 @@ const initialRows = [
     createData('Dec', 'R300', 'Outstanding', 'awaiting', <Checkbox />, false),
 ];
 
-function PlanOneData() {
+function PlanOneData({recommendedPlanOne}) {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(4);
-    const [transactions, setTransactions] = useState(null)
+    // const [transactions, setTransactions] = useState([])
     const [rows, setRows] = useState(initialRows)
+
+
+
 
     useEffect(() => {
         const storedRows = JSON.parse(localStorage.getItem('BasicPlan'));
@@ -41,12 +44,21 @@ function PlanOneData() {
         }
     }, []);
 
-   
-  useEffect(() => {
-    // Retrieve transaction data from local storage
-    const transactionData = JSON.parse(localStorage.getItem('Transactions'));
-    setTransactions(transactionData);
-  }, []);
+
+
+    // useEffect(() => {
+    //     const storedTransaction = localStorage.getItem("Transactions")
+    //     const transactionData = JSON.parse(storedTransaction)
+
+    //   setTransactions(transactionData)
+
+    // }, [])
+
+    // const recommendedPlan = transactions.filter(
+    //     transaction => transaction.transactionType === 'Income' && transaction.transactionAmount <= 5000
+    // )
+
+
 
 
     const handleCheckboxChange = (index) => {
@@ -81,126 +93,68 @@ function PlanOneData() {
     };
 
     return (
-        < div className='planTables' >
-            {
-              transactions && transactions.transactionType === "Income" &&  transactions.transactionAmount < 5000 ? (
-                    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-                        <div className='planHeading'>
-                            <h3 className='plaNum'>Basic Plan</h3>
-                            <h1 style={{color:"red"}}>Recommended</h1>
-
-                            <h3 className='totalAmount'>Total: R3600</h3>
-                        </div>
-                        <TableContainer>
-                            <Table stickyHeader aria-label="sticky table">
-                                <TableHead>
-                                    <TableRow>
-                                        {columns.map((column) => (
-                                            <TableCell
-                                                key={column.id}
-                                                align={column.align}
-                                                style={{ minWidth: column.minWidth }}
-                                            >
-                                                {column.label}
-                                            </TableCell>
-                                        ))}
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {rows
-                                        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                        .map((row, index) => {
-                                            return (
-                                                <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                                                    {columns.map((column) => {
-                                                        const value = row[column.id];
-                                                        return (
-                                                            <TableCell key={column.id} align={column.align}>
-                                                                {column.id === 'tick' ?
-                                                                    <Checkbox
-                                                                        checked={row.isChecked}
-                                                                        onChange={() => handleCheckboxChange(index)}
-                                                                    />
-                                                                    : value}
-                                                            </TableCell>
-                                                        );
-                                                    })}
-                                                </TableRow>
-                                            );
-                                        })}
-                                </TableBody>
-                            </Table>
-                        </TableContainer>
-                        <TablePagination
-                            rowsPerPageOptions={[4, 8, 12]}
-                            component="div"
-                            count={rows.length}
-                            rowsPerPage={rowsPerPage}
-                            page={page}
-                            onPageChange={handleChangePage}
-                            onRowsPerPageChange={handleChangeRowsPerPage}
-                        />
-                    </Paper>
-                ) : (
-                    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-                        <div className='planHeading'>
-                            <h3 className='plaNum'>Basic Plan</h3>
-                            <h3 className='totalAmount'>Total: R3600</h3>
-                        </div>
-                        <TableContainer>
-                            <Table stickyHeader aria-label="sticky table">
-                                <TableHead>
-                                    <TableRow>
-                                        {columns.map((column) => (
-                                            <TableCell
-                                                key={column.id}
-                                                align={column.align}
-                                                style={{ minWidth: column.minWidth }}
-                                            >
-                                                {column.label}
-                                            </TableCell>
-                                        ))}
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {rows
-                                        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                        .map((row, index) => {
-                                            return (
-                                                <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                                                    {columns.map((column) => {
-                                                        const value = row[column.id];
-                                                        return (
-                                                            <TableCell key={column.id} align={column.align}>
-                                                                {column.id === 'tick' ?
-                                                                    <Checkbox
-                                                                        checked={row.isChecked}
-                                                                        onChange={() => handleCheckboxChange(index)}
-                                                                    />
-                                                                    : value}
-                                                            </TableCell>
-                                                        );
-                                                    })}
-                                                </TableRow>
-                                            );
-                                        })}
-                                </TableBody>
-                            </Table>
-                        </TableContainer>
-                        <TablePagination
-                            rowsPerPageOptions={[4, 8, 12]}
-                            component="div"
-                            count={rows.length}
-                            rowsPerPage={rowsPerPage}
-                            page={page}
-                            onPageChange={handleChangePage}
-                            onRowsPerPageChange={handleChangeRowsPerPage}
-                        />
-                    </Paper>
-                )
-            }
-
-        </div >
+        <div className='planTables'>
+            <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+            {recommendedPlanOne.length > 0 &&
+                        (
+                            <div className="recommendedBadge">Recommended</div>
+                        )
+                    }
+                <div className='planHeading'>
+                    <h3 className='plaNum'>Basic Plan</h3>
+                    <h3 className='totalAmount'>Total: R3600</h3>
+                </div>
+                <TableContainer>
+                    <Table stickyHeader aria-label="sticky table">
+                        <TableHead>
+                            <TableRow>
+                                {columns.map((column) => (
+                                    <TableCell
+                                        key={column.id}
+                                        align={column.align}
+                                        style={{ minWidth: column.minWidth }}
+                                    >
+                                        {column.label}
+                                    </TableCell>
+                                ))}
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {rows
+                                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                                .map((row, index) => {
+                                    return (
+                                        <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                                            {columns.map((column) => {
+                                                const value = row[column.id];
+                                                return (
+                                                    <TableCell key={column.id} align={column.align}>
+                                                        {column.id === 'tick' ?
+                                                            <Checkbox
+                                                                checked={row.isChecked}
+                                                                onChange={() => handleCheckboxChange(index)}
+                                                            />
+                                                            : value}
+                                                    </TableCell>
+                                                );
+                                            })}
+                                        </TableRow>
+                                    );
+                                })}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+                <TablePagination
+                    rowsPerPageOptions={[4, 8, 12]}
+                    component="div"
+                    count={rows.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    onPageChange={handleChangePage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
+                />
+            </Paper>
+        </div>
     );
 }
 

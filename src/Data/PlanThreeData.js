@@ -40,11 +40,11 @@ const initialRows = [
     createData('Dec', 'R2400', 'Outstanding', "awaiting", <Checkbox />, false),
 ];
 
-function PlanThreeData() {
+function PlanThreeData(recommendedPlanThree) {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(4);
-    const [rows, setRows] = useState(initialRows) 
-   
+    const [rows, setRows] = useState(initialRows)
+
 
 
 
@@ -65,7 +65,7 @@ function PlanThreeData() {
         }
     }, []);
 
- 
+
 
 
     const handleCheckboxChange = (index) => {
@@ -89,11 +89,15 @@ function PlanThreeData() {
         setRows(updatedRows);
     };
 
- 
-  return (
-    <div className='planTables'>
 
+    return (
+        <div className='planTables'>
             <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+            {recommendedPlanThree.length > 0 &&
+                        (
+                            <div className="recommendedBadge">Recommended</div>
+                        )
+                    }
                 <div className='planHeading'>
                     <h3 className='plaNum'>Premium Plan</h3>
                     <h3 className='totalAmount'>Total: R15 300</h3>
@@ -137,7 +141,7 @@ function PlanThreeData() {
                                         </TableRow>
                                     );
                                 })}
-                              
+
                         </TableBody>
                     </Table>
                 </TableContainer>
@@ -154,12 +158,12 @@ function PlanThreeData() {
 
 
 
-   
-
-</div>
 
 
-  )
+        </div>
+
+
+    )
 }
 
 export default PlanThreeData

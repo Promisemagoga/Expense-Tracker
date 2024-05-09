@@ -5,16 +5,18 @@ import PlanOneData from '../Data/PlanOneData';
 import PlanTwoData from '../Data/PlanTwoData';
 import PlanThreeData from '../Data/PlanThreeData';
 import { useEffect } from 'react';
+import { useState } from 'react';
 
 
 
 function SavingsPlan() {
-    const [seeTable2, setSeeTable2] = React.useState(false);
-    const [seeTable1, setSeeTable1] = React.useState(true);
+    const [seeTable2, setSeeTable2] = useState(false);
+    const [seeTable1, setSeeTable1] = useState(true);
     const [seeTable3, setSeeTable3] = React.useState(false);
+    const [transactions, setTransactions] = useState([])
 
 
-    
+
 
 
 
@@ -38,6 +40,29 @@ function SavingsPlan() {
         setSeeTable1(true)
     }
 
+    useEffect(() => {
+        const storedTransaction = localStorage.getItem("Transactions")
+        const transactionData = JSON.parse(storedTransaction)
+
+        setTransactions(transactionData)
+
+    }, [])
+
+    const recommendedPlanOne = transactions.filter(
+        transaction => transaction.transactionType === 'Income' && transaction.transactionAmount <= 5000
+    )
+
+    const recommendedPlanTwo = transactions.filter(
+        transaction => transaction.transactionType === 'Income' && transaction.transactionAmount > 5000 && transaction.transactionAmount<= 10000 
+
+    )
+
+    const recommendedPlanThree = transactions.filter(
+        transaction => transaction.transactionType === 'Income' && transaction.transactionAmount > 10000
+    )
+
+
+
 
 
     return (
@@ -51,18 +76,18 @@ function SavingsPlan() {
                 <div className="searchBarSide">
                 </div>
                 <div className='planTables'>
+          
+                   
                     {seeTable1 && (
                         <div>
-                            <PlanOneData />
+                            <PlanOneData recommendedPlanOne={recommendedPlanOne}/>
                             <button onClick={seeTableTwo} className='nextBtn'>Next</button>
                         </div>
                     )}
-
-
                     {
                         seeTable2 && (
                             <div>
-                                <PlanTwoData />
+                                <PlanTwoData recommendedPlanTwo={recommendedPlanTwo}/>
                                 <div className='nextDiv'>
                                     <button onClick={BackToTableOne} className='nextBtn'>Back</button>
                                     <button onClick={seeTableThree} className='nextBtn'>Next</button>
@@ -75,8 +100,7 @@ function SavingsPlan() {
                     {
                         seeTable3 && (
                             <div>
-
-                                <PlanThreeData />
+                                <PlanThreeData recommendedPlanThree={recommendedPlanThree}/>
                                 <button onClick={BackToTableTwo} className='nextBtn'>Back</button>
                             </div>
                         )

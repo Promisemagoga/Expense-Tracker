@@ -224,6 +224,18 @@ select {
 
 }
 
+.recommendedBadge{
+  margin-top: 10px;
+  margin-left: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  width: 25%;
+  background-color: #E3FEF7;
+  color: #135D66;
+ 
+}
+
 .delete:hover {
   background-color: red;
   color: #ffffff;
