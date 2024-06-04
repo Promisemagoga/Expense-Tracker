@@ -1,47 +1,108 @@
-import { CreditScore, CreditScoreSharp, DashboardRounded, List, Person, Savings, Score, Settings } from '@mui/icons-material'
+import { CloseRounded, CreditScore, CreditScoreSharp, DashboardRounded, List, Menu, Person, Savings, Score, Settings } from '@mui/icons-material'
 import { Link, useNavigate } from 'react-router-dom';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useMediaQuery } from '@mui/material';
 
 function SideNav() {
+
+    const [openMenue, setOpenMenue] = useState(false)
+    // const isDesktop = ("min-width:1023px")
+    const isDesktop = useMediaQuery('(min-width:767px)')
+
+    function openSideNav() {
+        setOpenMenue(true)
+    }
+
+    function closeSideNav() {
+        setOpenMenue(false)
+    }
+
+    useEffect(() => {
+        console.log(openMenue);
+    })
+
     return (
-        <main className='sideNav'>
-            <div className='logo'>
-                <h1>DFA</h1>
-                <p>Digi-Financial-Advisor</p>
-            </div>
-            <div className='sideNavLinks'>
-                <div className='sideNavIcons'>
-                    <Score style={{ color: "#E3FEF7" }} />
-                    <Link to='/'>Overview</Link>
-                </div>
-                <div className='sideNavIcons'>
-                    <DashboardRounded style={{ color: "#E3FEF7" }} />
-                    <Link to="/dashboard">Dashboard</Link>
-                </div>
-                <div className='sideNavIcons'>
-                    <List style={{ color: "#E3FEF7" }} />
-                    <Link to='/categories'>Categories</Link>
-                </div>
-                <div className='sideNavIcons'>
-                    <Savings style={{ color: "#E3FEF7" }} />
-                    <a href='/savings'>Saving Plans</a>
-                </div>
-                <div className='sideNavIcons'>
-                    <CreditScoreSharp style={{ color: "#E3FEF7" }} />
-                    <a href=''>Credit Score</a>
-                </div>
-                {/* <a href=''>Get a financial advisor</a> */}
-                <div className='sideNavIcons'>
-                    <Settings style={{ color: "#E3FEF7" }} />
-                    <a href=''>Settings</a>
-                </div>
-                <div className='sideNavIcons'>
-                    <Person style={{ color: "#E3FEF7" }} />
-                    <a href=''>Profile</a>
-                </div>
-            </div>
-            <button className='logOut'>Logout</button>
-        </main>
+        <>
+            {isDesktop ? (
+              
+                    <main className='sideNav'>
+                        <div className='logo'>
+                            <h1>DFA</h1>
+                            <p>Digi-Financial-Advisor</p>
+                        </div>
+                        <div className='sideNavLinks'>
+                            <Link to="/" className='sideNavIcons'>
+                                <DashboardRounded style={{ color: "#E3FEF7" }} />
+                                <p>Dashboard</p>
+
+                            </Link>
+                            <Link className='sideNavIcons' to='/savings'>
+                                <Savings style={{ color: "#E3FEF7" }} />
+
+                                <p>Saving Plans</p>
+
+                            </Link>
+                            <Link className='sideNavIcons' to='/creditscore'>
+                                <CreditScoreSharp style={{ color: "#E3FEF7" }} />
+
+                                <p>Credit Score</p>
+                            </Link>
+                            <Link className='sideNavIcons' to=''>
+                                <Settings style={{ color: "#E3FEF7" }} />
+                                <p>Settings</p>
+                            </Link>
+                            <Link className='sideNavIcons' to=''>
+                                <Person style={{ color: "#E3FEF7" }} />
+                                <p>Profile</p>
+                            </Link>
+                        </div>
+                        <button className='logOut'>Logout</button>
+                    </main>
+            ) : (
+                <>
+                    <Menu className='hamburgerMenue' onClick={openSideNav} />
+                    {openMenue && (
+                        <main className='sideNav'>
+                            <CloseRounded className='closeIcon' onClick={closeSideNav} />
+                            <div className='logo'>
+                                <h1>DFA</h1>
+                                <p>Digi-Financial-Advisor</p>
+                            </div>
+                            <div className='sideNavLinks'>
+                                <Link to="/" className='sideNavIcons'>
+                                    <DashboardRounded style={{ color: "#E3FEF7" }} />
+                                    <p>Dashboard</p>
+
+                                </Link>
+                                <Link className='sideNavIcons' to='/savings'>
+                                    <Savings style={{ color: "#E3FEF7" }} />
+
+                                    <p>Saving Plans</p>
+
+                                </Link>
+                                <Link className='sideNavIcons' to='/creditscore'>
+                                    <CreditScoreSharp style={{ color: "#E3FEF7" }} />
+
+                                    <p>Credit Score</p>
+                                </Link>
+                                <Link className='sideNavIcons' to=''>
+                                    <Settings style={{ color: "#E3FEF7" }} />
+                                    <p>Credit Score</p>
+                                </Link>
+                                <Link className='sideNavIcons' to=''>
+                                    <Person style={{ color: "#E3FEF7" }} />
+                                    <p>Profile</p>
+                                </Link>
+                            </div>
+                            <button className='logOut'>Logout</button>
+                        </main>
+                    )}
+                </>
+            )}
+
+
+        </>
+
     )
 }
 

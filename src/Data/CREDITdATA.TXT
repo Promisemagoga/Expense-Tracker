@@ -1,0 +1,33 @@
+Register your consumer
+Thanks for registering your consumer with the Open Bank Project API! Here is your developer information. Please save it in a secure location.
+
+Please save it in a secure location.
+
+Consumer ID:f0c1e0de-6649-4c6e-ba4f-8887d3fb5d3f
+Application Type:Public
+Application Name:DFA
+User redirect URL:http://localhost:3000/creditscore
+Developer Email:promisetshegofatsom@gmail.com
+App Description:It is a digital financial advisor web app
+Client certificate:None
+Consumer Key:h3h0lpzm3ud2ukae1eifapxb3ubygcquko1a325w
+Consumer Secret:frbo031ng4n1ylu4210en0lz1rnv4miizmnc5uud
+OAuth 1.0a Endpoint:https://apisandbox.openbankproject.com/oauth/initiate
+OAuth 1.0a Documentation:How to use OAuth for OpenBankProject
+Direct Login Endpoint:https://apisandbox.openbankproject.com/my/logins/direct
+Direct Login Documentation:How to use Direct Login
+Please tell us more your Application and / or Startup using this link.
+OAuth2:oauth2.client_id=h3h0lpzm3ud2ukae1eifapxb3ubygcquko1a325w
+oauth2.redirect_uri=http://localhost:3000/creditscore
+oauth2.client_scope=ReadAccountsBasic,\
+ReadAccountsDetail,\
+ReadBalances,\
+ReadTransactionsBasic,\
+ReadTransactionsDebits,\
+ReadTransactionsDetail,\
+ReadAccountsBerlinGroup,\
+ReadBalancesBerlinGroup,\
+ReadTransactionsBerlinGroup
+
+oauth2.jws_alg=ES256
+oauth2.jwk_private_key={"kty":"EC","d":"6PCRr-_1Ec3KFJa6DoN4vYCXonrX5J5euPLorc9M8uQ","use":"sig","crv":"P-256","kid":"81b17900-0b40-4283-80a1-263b3af04281","x":"gKdSx0AEjZd_ijUpAotb1rLb51QnLlXvdKn5LqdVztg","y":"yS-F4-AcR4ixBLdJpQb61fSSSV3gMEEkjlhyN-wiiGk","alg":"ES256"}

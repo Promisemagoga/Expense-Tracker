@@ -12,12 +12,24 @@
   height: 100vh;
 }
 
-.mainContent{
+.mainContent {
   width: 80%;
   margin: 20px;
+  overflow-y: scroll;
 }
 
-.searchBarSide{
+.bereue {
+  color: #135D66;
+  text-decoration: none;
+
+}
+
+
+ul {
+  margin-top: 20px;
+}
+
+.searchBarSide {
   width: 28.5%;
   margin-top: 20px;
   display: flex;
@@ -26,7 +38,7 @@
   margin-left: auto;
 }
 
-.searchBarSide button{
+.searchBarSide button {
   height: 6vh;
   background-color: #135D66;
   color: #fff;
@@ -82,11 +94,11 @@
   font-style: normal;
 }
 
-.headBar h1{
+.headBar h1 {
   color: #135D66;
 }
 
-.logo p{
+.logo p {
   font-family: "Poetsen One", sans-serif;
   font-weight: lighter;
   font-style: italic;
@@ -100,7 +112,7 @@
   flex-direction: row;
 }
 
-.headBar{
+.headBar {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -128,31 +140,48 @@
 
 }
 
-.addTransaction-container h1{
+.addTransaction-container h1 {
   color: #135D66;
 }
 
-.backButton{
+.backButton {
   background-color: #135D66;
   color: #ffffff;
   padding: 15px;
   border-radius: 100%;
+  margin: 30px;
 }
 
 input {
   width: 75%;
   height: 8vh;
-  border: 1px solid #135D66;
+  border: 2px solid #135D66;
   border-radius: 5px;
   padding-left: 20px;
 }
 
-.modal{
+.inputScore {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.inputScore button {
+  width: 18%;
+  height: 8vh;
+  background-color: #135D66;
+  color: #E3FEF7;
+  border: none;
+  border-radius: 5px;
+}
+
+.modal {
   position: absolute;
-  z-index: 30px;
+  z-index: 30;
   width: 100%;
   height: 100vh;
-  padding: 30px;
+  /* padding: 30px; */
   background-color: #ffffff;
 
 }
@@ -165,7 +194,7 @@ select {
   padding-left: 20px;
 }
 
-.planHeading{
+.planHeading {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -173,15 +202,15 @@ select {
   padding: 20px;
 }
 
-.plaNum{
+.plaNum {
   color: #135D66;
 }
 
-.totalAmount{
+.totalAmount {
   color: green;
 }
 
-.nextBtn{
+.nextBtn {
   margin-top: 20px;
   width: 100px;
   height: 30px;
@@ -191,7 +220,7 @@ select {
   color: #fff;
 }
 
-.nextDiv{
+.nextDiv {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -224,7 +253,7 @@ select {
 
 }
 
-.recommendedBadge{
+.recommendedBadge {
   margin-top: 10px;
   margin-left: 20px;
   padding: 10px;
@@ -233,7 +262,7 @@ select {
   width: 25%;
   background-color: #E3FEF7;
   color: #135D66;
- 
+
 }
 
 .delete:hover {
@@ -278,17 +307,224 @@ select {
   margin-right: 0;
 }
 
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 50vh;
+  position: relative;
+  /* background-color: #135D66; */
+  background-image: url("/public/businessman-3213659_1280.jpg");
+  background-color: rgba(99, 99, 99, 0.2);
+  background-position: center;
+  margin-bottom: 30px;
+  /* border-radius: 10px 100px / 120px 100px; */
+
+  /* border-radius: 0 0 0 80%; */
+  border-radius: 5px;
+}
+
+.creditReportContainer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 50vh;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  border-radius: 5px;
+  background-color: #E3FEF7;
+}
+
+.headerOverlay {
+  width: 100%;
+  height: 50vh;
+  background-color: rgba(5, 99, 99, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.creditReport {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  row-gap: 10px;
+}
+
+.header h1 {
+  color: #E3FEF7;
+}
+
+.adviceBox {
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 30px;
+}
+
+
+.scoreContent {
+  width: 80%;
+  height: 50vh;
+  /* overflow-y: auto; */
+  margin: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 30px;
+}
+
+.creditQuestions {
+  color: #135D66;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.accordionAnswers {
+  color: grey;
+}
+
+.creditAnswer {
+  color: gray;
+}
+
+.subAnswers {
+  color: grey;
+}
+
+.answerBtns {
+  display: flex;
+  flex-direction: row;
+  column-gap: 20px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.answerBtns button {
+  width: 100px;
+  height: 5vh;
+}
+
+.FAQs {
+  margin-top: 30px;
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+  /* border: 1px solid grey; */
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.yes {
+  background-color: #E3FEF7;
+  color: #135D66;
+  border: none;
+  border-radius: 20px;
+}
+
+.bodyContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.adviceContainer {
+  width: 95%;
+  height: fit-content;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: row;
+  column-gap: 30px;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px 100px / 120px 100px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+}
+
+.no {
+  background-color: #135D66;
+  color: #E3FEF7;
+  border: none;
+  border-radius: 20px;
+
+}
+
+.scoreContent h2 {
+  color: #135D66;
+}
+
+
+
+.scoreContent li {
+  width: 80%;
+
+}
+
+.creditQcont {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+}
+
+
+
+@media screen and (min-width:767px) and (max-width:1023px) {
+  .sideNavIcons p {
+    display: none;
+  }
+
+  .sideNav {
+    width: 10%;
+  }
+
+
+  .logo p {
+    display: none;
+  }
+
+  .mainContent {
+    width: 90%;
+  }
+
+  .hamburgerMenue {
+    display: none !important;
+  }
+
+
+}
+
 @media screen and (max-width:767px) {
 
-  input {
+  .addTransaction-container {
+    width: 80%;
+    padding: 20px;
+  
+  }
+
+  /* input {
 
     width: 330px;
     height: 50px;
 
-  }
+  } */
 
   select {
-    width: 346px;
+    width: 80%;
     height: 50px;
   }
 
@@ -301,6 +537,26 @@ select {
     margin-right: auto;
     margin-bottom: 20px;
     margin-top: 20px;
+  }
+
+
+  .closeIcon {
+
+    margin-left: auto;
+    padding: 20px;
+    font-size: 30px;
+    color: #E3FEF7;
+  }
+
+  .sideNav {
+    width: 100%;
+    position: absolute;
+    z-index: 50;
+  }
+
+  .mainContent {
+    width: 100%;
+
   }
 
 }
