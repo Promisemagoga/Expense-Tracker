@@ -22,12 +22,36 @@
   color: #135D66;
   text-decoration: none;
 
+
+
 }
 
+.creditSecCont {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  align-items: center
+}
 
 ul {
   margin-top: 20px;
 }
+
+.buttonProgress {
+  color: aliceblue;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -12;
+  margin-left: -12;
+}
+
+.wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+
 
 .searchBarSide {
   width: 28.5%;
@@ -36,6 +60,54 @@ ul {
   flex-direction: column;
   row-gap: 20px;
   margin-left: auto;
+}
+
+.registerForm {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  align-items: center;
+  justify-content: center;
+}
+
+.registerForm label {
+  width: 40%;
+  color: #135D66;
+}
+
+.registerForm input {
+  border: 2px solid #135D66;
+  width: 100%;
+
+}
+
+.passwordCont {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 480px
+}
+
+.registerForm button {
+  width: 30%;
+  height: 8vh;
+  background-color: #135D66;
+  border-radius: 5px;
+  text-transform: uppercase;
+  color: #ffffff;
+  border: none;
+}
+
+.iconButton {
+  background-color: transparent !important;
+  color: #135D66 !important;
+  width: 0% !important;
+  height: 0vh !important;
+  position: absolute;
+  z-index: 50;
+  right: 30px;
 }
 
 .searchBarSide button {
@@ -161,6 +233,8 @@ input {
 }
 
 .inputScore {
+
+  margin-top: 50px;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -387,7 +461,9 @@ select {
 .creditQuestions {
   color: #135D66;
   font-weight: 700;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
+  text-align: left;
+  margin-bottom: 10px;
 }
 
 .accordionAnswers {
@@ -478,7 +554,7 @@ select {
   width: 100%;
   display: flex;
   flex-direction: column;
-
+  margin-top: 30px;
 }
 
 
@@ -513,15 +589,25 @@ select {
   .addTransaction-container {
     width: 80%;
     padding: 20px;
-  
+
   }
 
-  /* input {
+  .addTransaction-container h1 {
+    font-size: 1.5rem;
+  }
 
-    width: 330px;
-    height: 50px;
+  .registerForm label {
+    width: 80%;
 
-  } */
+  }
+
+  .passwordCont {
+    width: 350px
+  }
+
+  .registerForm button {
+    width: 60%;
+  }
 
   select {
     width: 80%;
@@ -551,7 +637,7 @@ select {
   .sideNav {
     width: 100%;
     position: absolute;
-    z-index: 50;
+    z-index: 100;
   }
 
   .mainContent {
@@ -559,4 +645,84 @@ select {
 
   }
 
+
+  .headBar {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: start;
+  }
+
+  .searchBarSide {
+    width: 48%;
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+
+
+  }
+
+
+
+  .hamburgerMenue {
+    display: block;
+    margin-left: 10px;
+    margin-top: 15px;
+    color: #135D66;
+    background-color: #E3FEF7;
+    padding: 10px;
+    border-radius: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+  }
+
+
+  .recommendedBadge {
+    margin-top: 10px;
+    margin-left: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    width: 35%;
+    background-color: #E3FEF7;
+    color: #135D66;
+
+  }
+
+  .headBar h1 {
+    margin-left: 50px;
+    font-size: 1.5rem;
+    margin-top: 5px;
+
+  }
+
+
+  .adviceContainer {
+    width: 88%;
+
+
+  }
+
+  .creditSecCont {
+    width: 100%;
+
+  }
+
+
+  .inputScore {
+    flex-direction: column;
+  }
+
+
+  .inputScore button {
+    width: 100%;
+  }
+
+  .inputScore input {
+    width: 90%;
+  }
 }

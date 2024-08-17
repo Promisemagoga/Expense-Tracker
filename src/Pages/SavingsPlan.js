@@ -71,7 +71,7 @@ function SavingsPlan() {
             <div className="mainContent">
                 <div className="headBar">
                     <h1>Saving Plans</h1>
-                    <SearchBar />
+                    {/* <SearchBar /> */}
                 </div>
                 <div className="searchBarSide">
                 </div>

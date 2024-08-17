@@ -21,6 +21,10 @@ function SideNav() {
         console.log(openMenue);
     })
 
+    function LogOut(){
+        localStorage.removeItem('user')
+    }
+
     return (
         <>
             {isDesktop ? (
@@ -31,7 +35,7 @@ function SideNav() {
                             <p>Digi-Financial-Advisor</p>
                         </div>
                         <div className='sideNavLinks'>
-                            <Link to="/" className='sideNavIcons'>
+                            <Link to="/dashboard" className='sideNavIcons'>
                                 <DashboardRounded style={{ color: "#E3FEF7" }} />
                                 <p>Dashboard</p>
 
@@ -56,7 +60,7 @@ function SideNav() {
                                 <p>Profile</p>
                             </Link>
                         </div>
-                        <button className='logOut'>Logout</button>
+                        <button className='logOut' onClick={LogOut}>Logout</button>
                     </main>
             ) : (
                 <>
@@ -87,14 +91,14 @@ function SideNav() {
                                 </Link>
                                 <Link className='sideNavIcons' to=''>
                                     <Settings style={{ color: "#E3FEF7" }} />
-                                    <p>Credit Score</p>
+                                    <p>Settings</p>
                                 </Link>
                                 <Link className='sideNavIcons' to=''>
                                     <Person style={{ color: "#E3FEF7" }} />
                                     <p>Profile</p>
                                 </Link>
                             </div>
-                            <button className='logOut'>Logout</button>
+                            <button className='logOut' onClick={LogOut}>Logout</button>
                         </main>
                     )}
                 </>

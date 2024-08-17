@@ -1,0 +1,57 @@
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
+
+function SignUp() {
+
+const[email,setEmail] = useState('')
+const[password, setPassword] = useState('')
+const [users, setUsers] = useState([])
+
+const handleRegister = (e) =>{
+  e.preventDefault()
+  if( email &&  password){
+    const userCred = {
+      email: email,
+      password: password
+    }
+
+    const newUser = [...users, userCred]
+    setUsers(newUser)
+    localStorage.setItem('user', JSON.stringify(newUser))
+    alert('Registration successful!')
+  } else{
+    alert('Please fill in all fields')
+  }
+}
+
+  return (
+    <div>
+      <form className='registerForm'>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', rowGap: '30px' }}>
+          <h3>Register</h3>
+          <img src={require("../img/logIn.png")} />
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', rowGap: '5px', marginBottom:'30px' }}>
+            {/* <h1 style={{ color: '#135D66' }}>DFA</h1>
+            <p style={{ color: 'aquamarine' }}>Digi-Financial-Advisor</p> */}
+          </div>
+        </div>
+        <label>
+          Email
+          <br />
+          <br />
+          <input value={email} onChange={(event) => setEmail(event.target.value)}/>
+        </label>
+        <label>
+          Password
+          <br />
+          <br />
+          <input value={password} onChange={(event) => setPassword(event.target.value)}/>
+        </label>
+        <button onClick={handleRegister}>Sign Up</button>
+        <p>Already have an account? <Link to='/'>Sign In</Link></p>
+      </form>
+    </div>
+  )
+}
+
+export default SignUp

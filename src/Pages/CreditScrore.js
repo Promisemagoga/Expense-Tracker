@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import SideNav from "../Components/SideNav";
-import { Accordion, AccordionDetails, AccordionSummary, Box, LinearProgress, Rating, Typography, useTheme } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, Box, CircularProgress, LinearProgress, Rating, Typography, useTheme } from "@mui/material";
 import { ExpandMore, ThumbUp } from "@mui/icons-material";
 import SearchBar from "../Components/SearchBar";
 
@@ -15,9 +15,26 @@ function CreditScore() {
   const [creditAdvice, setCreditAdvice] = useState([]);
   const [creditRating, setCreditRating] = useState(0)
   const [showCreditQuestion, setShowCreditQuestion] = useState(true)
+  const [showAccordion, setShowAccordion] = useState(true)
+  const [loading, setLoading] = useState(false)
 
+  // const useStyles = makeStyles((theme) => ({
+  //   buttonProgress: {
+  //     color: theme.palette.primary.main,
+  //     position: 'absolute',
+  //     top: '50%',
+  //     left: '50%',
+  //     marginTop: -12,
+  //     marginLeft: -12
+  //   },
+  //   wrapper: {
+  //     position: 'relative',
+  //     display: 'inline-block'
+  //   }
+  // }))
 
   const theme = useTheme()
+  // const classes = useStyles()
 
   useEffect(() => {
     const storedScores = localStorage.getItem("Scores");
@@ -54,7 +71,7 @@ function CreditScore() {
 
         setCreditRating(2)
       } else if (creditscore >= 670 && creditscore <= 739) {
-        setCreditStatus("Good");
+        setCreditStatus("Better");
         setCreditMessage("This indicates a good credit risk. You may be viewed as a favourable individual and be offered relatively good interest rates and terms. ");
         setCreditAdvice([
           "Continue paying all bills on time to avoid late payments that can harm your score",
@@ -65,7 +82,7 @@ function CreditScore() {
         ])
         setCreditRating(3)
       } else if (creditscore >= 740 && creditscore <= 799) {
-        setCreditStatus("Very Good");
+        setCreditStatus("Good");
         setCreditMessage("You are seen as very dependable. You often qualify for very competitive interest rates and loan terms. ");
         setCreditAdvice([
           "Continue paying all bills on time to avoid late payments that can harm your score",
@@ -97,23 +114,33 @@ function CreditScore() {
   function haveNoCreditScore() {
     setDontHaveScore(true);
     setHaveScore(false);
+    setShowCreditQuestion(false)
+    setShowAccordion(true)
+
   }
 
   function haveCreditScore() {
     setHaveScore(true);
     setDontHaveScore(false);
+    setShowCreditQuestion(false)
+    setShowAccordion(false)
   }
 
-  function saveCreditScore() {
+  function saveCreditScore(e) {
+    setLoading(true)
+    setTimeout(() => {
+      setLoading(false)
+    }, 2000);
     localStorage.setItem("Scores", inputScore);
     setSavedScore(inputScore);
+    window.location.reload()
   }
 
   const ranges = [
-    { label: 'Very Poor', min: 300, max: 579, color: theme.palette.error.main },
-    { label: 'fair', min: 580, max: 699, color: theme.palette.warning.main },
-    { label: 'Good', min: 700, max: 739, color: theme.palette.success.light },
-    { label: 'Very Good', min: 740, max: 799, color: theme.palette.success.main },
+    { label: 'Poor', min: 300, max: 579, color: theme.palette.error.main },
+    { label: 'Fair', min: 580, max: 699, color: theme.palette.warning.main },
+    { label: 'Better', min: 700, max: 739, color: theme.palette.success.light },
+    { label: 'Good', min: 740, max: 799, color: theme.palette.success.main },
     { label: 'Excellent', min: 800, max: 850, color: theme.palette.success.dark },
 
 
@@ -121,7 +148,7 @@ function CreditScore() {
 
   const currentRange = ranges.find(range => savedScore >= range.min && savedScore <= range.max)
   console.log(currentRange);
-  const progress = ((savedScore - 300) / 550) * 100;
+  const progress = ((savedScore - 300) / 850) * 100;
   // const progress = ((savedScore - 300) / 550) * 100;
 
   console.log(progress);
@@ -131,65 +158,12 @@ function CreditScore() {
       <div className="mainContent">
         <div className="headBar">
           <h1>CreditScore</h1>
-          <SearchBar />
+          {/* <SearchBar /> */}
         </div>
         {/* <div className="header">
           <h1>Credit Score</h1>
         </div> */}
         <div className="bodyContainer">
-          {showCreditQuestion && (
-            <div className="creditQcont">
-              <div style={{ display: "flex", flexDirection: "column", width: "40%", alignItems: "center" }}>
-                <li className="creditQuestions">
-                  Do you know your credit score
-                </li>
-                <div className="answerBtns">
-                  <button onClick={haveCreditScore} className="yes">YES</button>
-                  <button onClick={haveNoCreditScore} className="no">NO</button>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {dontHaveScore && (
-            <ol>
-              <li className="creditQuestions">
-                Here are the sites you can check your credit score and credit
-                records for free
-              </li>
-              <ul>
-                <li className="bereue">
-                  <Link to="" className="bereue">ClearScore</Link>
-                </li>
-                <li className="bereue">
-                  <Link to="" className="bereue">Experian</Link>
-                </li>
-                <li className="bereue">
-                  <Link to="" className="bereue">MyCreditCheck</Link>
-                </li>
-                <li className="bereue">
-                  <Link to="" className="bereue">Kudough</Link>
-                </li>
-                <li className="bereue">
-                  <Link to="" className="bereue">Credit Bureau</Link>
-                </li>
-                <li>
-                  <Link to="" className="bereue">TransUnion</Link>
-                </li>
-              </ul>
-            </ol>
-          )}
-
-          {haveScore && (
-            <div className="inputScore">
-              <input
-                placeholder="Enter Credit Score"
-                value={inputScore}
-                onChange={(event) => setInputScore(event.target.value)}
-              />
-              <button onClick={saveCreditScore}>Save</button>
-            </div>
-          )}
           <div className="header">
             <div className="headerOverlay">
               <Box sx={{ width: '80%', textAlign: 'center', padding: theme.spacing(2), marginBottom: "50px" }}>
@@ -219,6 +193,7 @@ function CreditScore() {
             </div>
 
           </div>
+
           <div className="creditReportContainer">
             <div className="creditReport">
               <h1 style={{ color: "#135D66" }}>{creditStatus}</h1>
@@ -227,7 +202,7 @@ function CreditScore() {
                 <Rating value={creditRating} readOnly />
               </Box>
             </div>
-            <img src={require("../img/781831.png")}/>
+            <img src={require("../img/781831.png")} />
           </div>
           <div className="adviceContainer">
             <Box>
@@ -244,59 +219,116 @@ function CreditScore() {
 
           </div>
         </div>
-        <div className="FAQs">
-          <Accordion>
-            <AccordionSummary
-              expandIcon={<ExpandMore />}
-              aria-controls="panel1-content"
-              id="panel1-header"
-              sx={{ color: "#135D66", fontWeight: "bold" }}
-            >
-              What is a credit score?
-            </AccordionSummary>
-            <AccordionDetails className="accordionAnswers">
-              A credit score is a numerical representation of an
-              individual's creditworthiness, based on their credit history.
-              It determines whether you are eligible to get a loan, car, or
-              house on credit.
-            </AccordionDetails>
-          </Accordion>
-          <Accordion>
-            <AccordionSummary
-              expandIcon={<ExpandMore />}
-              aria-controls="panel2-content"
-              id="panel2-header"
-              sx={{ color: "#135D66", fontWeight: "bold" }}
+        {showAccordion && (
+          <div className="FAQs">
+            <Accordion>
+              <AccordionSummary
+                expandIcon={<ExpandMore />}
+                aria-controls="panel1-content"
+                id="panel1-header"
+                sx={{ color: "#135D66", fontWeight: "bold" }}
+              >
+                What is a credit score?
+              </AccordionSummary>
+              <AccordionDetails className="accordionAnswers">
+                A credit score is a numerical representation of an
+                individual's creditworthiness, based on their credit history.
+                It determines whether you are eligible to get a loan, car, or
+                house on credit.
+              </AccordionDetails>
+            </Accordion>
+            <Accordion>
+              <AccordionSummary
+                expandIcon={<ExpandMore />}
+                aria-controls="panel2-content"
+                id="panel2-header"
+                sx={{ color: "#135D66", fontWeight: "bold" }}
 
-            >
-              What is the purpose of having a clean credit score?
-            </AccordionSummary>
-            <AccordionDetails className="accordionAnswers">
-              Credit scores are used by lenders, landlords, insurers, and
-              even some employers to make decisions about loans, rental
-              applications, insurance premiums, and job offers.
-            </AccordionDetails>
-          </Accordion>
+              >
+                What is the purpose of having a clean credit score?
+              </AccordionSummary>
+              <AccordionDetails className="accordionAnswers">
+                Credit scores are used by lenders, landlords, insurers, and
+                even some employers to make decisions about loans, rental
+                applications, insurance premiums, and job offers.
+              </AccordionDetails>
+            </Accordion>
 
-          <Accordion>
-            <AccordionSummary
-              expandIcon={<ExpandMore />}
-              aria-controls="panel4-content"
-              id="panel4-header"
-              sx={{ color: "#135D66", fontWeight: "bold" }}
+            <Accordion>
+              <AccordionSummary
+                expandIcon={<ExpandMore />}
+                aria-controls="panel4-content"
+                id="panel4-header"
+                sx={{ color: "#135D66", fontWeight: "bold" }}
 
-            >
-              How are credit scores calculated?
-            </AccordionSummary>
-            <AccordionDetails className="accordionAnswers">
-              Credit Scores are calculated based on factors such as:
-              Payment history,
-              Amounts owed,
-              Length of credit history,
-              Types of credit
-            </AccordionDetails>
-          </Accordion>
-        </div>
+              >
+                How are credit scores calculated?
+              </AccordionSummary>
+              <AccordionDetails className="accordionAnswers">
+                Credit Scores are calculated based on factors such as:
+                Payment history,
+                Amounts owed,
+                Length of credit history,
+                Types of credit
+              </AccordionDetails>
+            </Accordion>
+          </div>
+        )}
+
+        {showCreditQuestion && (
+          <div className="creditQcont">
+            <div className="creditSecCont">
+              <li className="creditQuestions">
+                Do you know your credit score
+              </li>
+              <div className="answerBtns">
+                <button onClick={haveCreditScore} className="yes">YES</button>
+                <button onClick={haveNoCreditScore} className="no">NO</button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {dontHaveScore && (
+          <div style={{ marginTop: "50px" }}>
+            <h3 className="creditQuestions">
+              Here are the sites you can check your credit score and credit
+              records for free
+            </h3>
+
+            <li className="bereue">
+              <Link to="" className="bereue">ClearScore</Link>
+            </li>
+            <li className="bereue">
+              <Link to="" className="bereue">Experian</Link>
+            </li>
+            <li className="bereue">
+              <Link to="" className="bereue">MyCreditCheck</Link>
+            </li>
+            <li className="bereue">
+              <Link to="" className="bereue">Kudough</Link>
+            </li>
+            <li className="bereue">
+              <Link to="" className="bereue">Credit Bureau</Link>
+            </li>
+            <li>
+              <Link to="" className="bereue">TransUnion</Link>
+            </li>
+
+          </div>
+        )}
+
+        {haveScore && (
+          <div className="inputScore">
+            <input
+              placeholder="Enter Credit Score"
+              value={inputScore}
+              onChange={(event) => setInputScore(event.target.value)}
+            />
+              <button onClick={saveCreditScore}>{loading ? "Loading..." : "Save"}</button>
+           
+          </div>
+        )}
       </div>
     </main>
   );

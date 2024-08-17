@@ -89,11 +89,14 @@ function Dashboard() {
       <div className="mainContent">
         <div className="headBar">
           <h1>Dashboard</h1>
-          <SearchBar />
-        </div>
-        <div className="searchBarSide">
+          {/* <SearchBar /> */}
+          <div className="searchBarSide">
           <button onClick={addNewTrans}>Add New Transaction</button>
         </div>
+        </div>
+        {/* <div className="searchBarSide">
+          <button onClick={addNewTrans}>Add New Transaction</button>
+        </div> */}
         <div>
           <TableContainer component={Paper} sx={{ marginTop: "30px" }}>
             <Table sx={{ minWidth: 700 }} aria-label="customized table">

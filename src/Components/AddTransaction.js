@@ -15,9 +15,17 @@ function AddTransaction({ setOpenAddModal }) {
     const [transactionCategory, setTransactionCategory] = useState("")
     const [transactions, setTransactions] = useState([]) || []
     const [addAlert, setAddAlert] = useState(false)
+    const [errorArlet,setErrorArlet]= useState(false)
+    const [loading, setLoading] = useState(false)
+
 
 
     function add() {
+
+        setLoading(true)
+        setTimeout(() => {
+            setLoading(false)
+        }, 2000);
 
         const storedTransaction = localStorage.getItem("Transactions")
         console.log(storedTransaction);
@@ -45,8 +53,9 @@ function AddTransaction({ setOpenAddModal }) {
 
         // Check if expenses exceed income
         if (totalExpenses > totalIncome) {
+            setErrorArlet(true)
             // Display error message
-            alert("Expenses exceed income!");
+            // alert("Expenses exceed income!");
 
             return;
         }
@@ -80,6 +89,11 @@ function AddTransaction({ setOpenAddModal }) {
             {addAlert && (
                 <Alert sx={{ width: "22%" }} style={{ marginLeft: "auto", marginRight: "auto", marginTop: "30px", marginBottom: "20px" }} severity="success" onClose={() => setAddAlert(false)} open={addAlert}>
                     Transaction successfully Added!
+                </Alert>
+            )}
+             {errorArlet && (
+                <Alert sx={{ width: {lg:"22%",md:"22%", xs:"70%"} }} style={{ marginLeft: "auto", marginRight: "auto", marginTop: "30px", marginBottom: "20px" }}  severity="warning" onClose={() => setErrorArlet(false)} open={errorArlet}>
+                   Expenses exceed income!
                 </Alert>
             )}
             <div className="addTransaction-container">
@@ -137,7 +151,7 @@ function AddTransaction({ setOpenAddModal }) {
                     <option>Miscellaneous   </option>
 
                 </select>
-                <button className="addBtn" onClick={add}>Add a transaction</button>
+                <button className="addBtn" onClick={add}>{loading ? "Loading..." : "Add a transaction"}</button>
             </div>
 
         </main>
