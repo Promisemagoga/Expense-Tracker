@@ -35,7 +35,7 @@ function SideNav() {
                             <p>Digi-Financial-Advisor</p>
                         </div>
                         <div className='sideNavLinks'>
-                            <Link to="/dashboard" className='sideNavIcons'>
+                            <Link to="/" className='sideNavIcons'>
                                 <DashboardRounded style={{ color: "#E3FEF7" }} />
                                 <p>Dashboard</p>
 
